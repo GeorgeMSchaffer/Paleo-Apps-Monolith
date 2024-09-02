@@ -5,24 +5,34 @@ import store from './store/store.ts'
 import { Provider } from 'react-redux'
 import {Interval} from "./common/types.ts";
 import './App.css'
+import IntervalList from "./components/intervals/IntervalList.tsx";
 
 function App() {
   const [intervals,setIntervals] = useState<Interval[]>([])
+    //[TODO] move error state to redux for sharing
+    const [error,setError] = useState<string>('');//[TODO] add ability to display an array of errors with an error type
     useEffect(() => {
+        console.log('Firing useEffect')
         fetch('http://localhost:3000/intervals')
             .then(response => response.json())
             .then(data => setIntervals(data))
             .catch((error) => {
                 console.error('Error:', error);
+                setError(error);
             });
 
     },[])
 
-    })
   return (
-      <div>
-          <b># of Intervals {intervals.length}</b>
-      </div>
+      <>
+      {error.length && (
+          <div color={'red'}>
+              <h1>Error</h1>
+              <p>{error}</p>
+          </div>
+      )}
+     <IntervalList intervals={intervals} />
+      </>
     // <Provider store={store}>
     //   <div>
     //     <a href="https://vitejs.dev" target="_blank">
