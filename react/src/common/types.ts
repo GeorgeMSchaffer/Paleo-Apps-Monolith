@@ -45,7 +45,7 @@ export enum EnumPhylums {
     MONERA = "Monera",
 }
 
-export enum AnimalClade {
+export enum EnumClade {
     Mammalia = "Mammalia",
     Aves = "Aves",
     Reptilia = "Reptilia",
@@ -65,54 +65,54 @@ export enum AnimalClade {
     Nematoda = "Nematoda"
 }
 export interface Diversity {
-    "interval_no": number
-    "interval_name": string,
-    "max_ma": number,
-    "min_ma": number,
-    "X_Ft": number,
-    "X_bL": number,
-    "X_FL": number,
-    "X_bt": number,
-    "sampled_in_bin": number,
-    "implied_in_bin": number,
-    "n_occs": number
+    "intervalNo": number
+    "intervalName": string,
+    "maxMya": number,
+    "minMya": number,
+    "xFt": number,
+    "xBL": number,
+    "xFL": number,
+    "xBt": number,
+    "sampledInBin": number,
+    "impliedInBin": number,
+    "numOccurances": number
 }
 export interface Taxa {
-    "taxon_no": number,
-    "record_type": string,
-    "taxon_rank": string,
-    "taxon_name": string,
-    "taxon_attr": string,
-    "accepted_no": number,
-    "accepted_rank": string,
-    "accepted_name": string,
-    "parent_no": number,
-    "reference_no": number,
-    "is_extant": string,
-    "n_occs": number
+    "taxonNo": number,
+    "recordType": string,
+    "taxonRank": string,
+    "taxonName": string,
+    "taxonAttr": string,
+    "acceptedNo": number,
+    "acceptedRank": string,
+    "acceptedName": string,
+    "parentNo": number,
+    "referenceNo": number,
+    "isExtant": string,
+    "numOccurances": number
 }
 export interface Occurrence {
-    "occurrence_no": number,
-    "record_type": string,
-    "collection_no": number,
-    "identified_name": string,
-    "identified_rank": string,
-    "identified_no": number,
-    "accepted_name": string,
-    "accepted_rank": string,
-    "accepted_no": number,
-    "early_interval": string,
-    "late_interval": string,
-    "max_ma": number,
-    "min_ma": number,
-    "reference_no": number,
+    "occurrenceNo": number,
+    "recordType": string,
+    "collectionNo": number,
+    "identifiedName": string,
+    "identifiedRank": string,
+    "identifiedNo": number,
+    "acceptedName": string,
+    "acceptedRank": string,
+    "acceptedNo": number,
+    "earlyInterval": string,
+    "lateInterval": string,
+    "maxMya": number,
+    "minMya": number,
+    "referenceNo": number,
     "cc": string
-    "latlng_basis": string,
-    "latlng_precision": number,
+    "latlngBasis": string,
+    "latlngPrecision": number,
     "geogscale": string
     "phylum": EnumPhylums,
-    "class": string,
-    "order": "Cetacea",
+    "cladeClass": string,
+    "cladeOrder": "Cetacea",
     "family": "NO_FAMILY_SPECIFIED",
     "genus": string
 }

@@ -1,6 +1,4 @@
 import { Interval } from "../../common/types";
-import 'bootstrap/dist/css/bootstrap.css';
-import { PhylumFilter } from "../filters/FilterPhylum";
 interface IntervalListProps {
     intervals: Interval[]
 }
@@ -10,7 +8,6 @@ export default function IntervalList(props: IntervalListProps) {
 
     return (
         <div className="p-4">
-            <PhylumFilter/>
             <b className="block mb-2 text-lg"># of Intervals {intervals.length}</b>
             <div className="table-responsive">
                 <table className="table table-striped table-bordered">

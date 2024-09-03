@@ -4,7 +4,7 @@ import { OccuranceList } from "./OccuranceList";
 export interface IOccuranceContainerProps{
 
 }
-export function OccuranceContainer(props:IOccuranceContainerProps){
+export function OccuranceContainer(){
     let occurances:Occurance[] = [];
     React.useEffect(()=>{
         fetch('/local/occurances')
