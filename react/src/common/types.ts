@@ -64,6 +64,24 @@ export enum EnumClade {
     Platyhelminthes = "Platyhelminthes",
     Nematoda = "Nematoda"
 }
+
+export interface Prevalence {
+    taxonNo: number
+    taxonName: string
+    taxonRank: string
+    imageNo: number
+    numOccurances: number
+}
+
+export interface PrevalenceJSON {
+    taxon_no: number
+    taxon_name: string
+    taxon_rank: string
+    image_no: number
+    num_occurances: number
+}
+
+
 export interface Diversity {
     "intervalNo": number
     "intervalName": string,
@@ -76,6 +94,20 @@ export interface Diversity {
     "sampledInBin": number,
     "impliedInBin": number,
     "numOccurances": number
+}
+
+export interface DiversityJSON {
+    "interval_no": number
+    "interval_name": string,
+    "max_mya": number,
+    "min_mya": number,
+    "x_Ft": number,
+    "x_bL": number,
+    "x_FL": number,
+    "x_Bt": number,
+    "sampled_in_bin": number,
+    "implied_in_Bin": number,
+    "num_occs": number
 }
 export interface Taxa {
     "taxonNo": number,
@@ -90,6 +122,20 @@ export interface Taxa {
     "referenceNo": number,
     "isExtant": string,
     "numOccurances": number
+}
+export interface TaxaJSON {
+    "taxon_no": number,
+    "record_type": string,
+    "taxon_rank": string,
+    "taxon_name": string,
+    "taxon_attr": string,
+    "accepted_no": number,
+    "accepted_rank": string,
+    "accepted_name": string,
+    "parent_no": number,
+    "reference_no": number,
+    "is_extant": string,
+    "n_occs": number
 }
 export interface Occurrence {
     "occurrenceNo": number,
@@ -117,7 +163,7 @@ export interface Occurrence {
     "genus": string
 }
 export interface Interval {
-    id: number;
+    intervalNo: number;
     recordType: EnumIntervalType;
     intervalName: string;
     abbrv: string;
@@ -127,9 +173,34 @@ export interface Interval {
     bAge: number;
     referenceNo: number;
 }
+export interface IntervalJSON {
+    interval_no: number;
+    record_type: EnumIntervalType;
+    interval_name: string;
+    abbrv: string;
+    parent_no: number;
+    color: string;
+    tAge: number;
+    bAge: number;
+    reference_no: number;
+}
 export interface Occurance {
     //[TODO] add after interval is ready
     // occuranceNo:Number;
     // genus:string;
     // family:string;
 }
+
+export interface ChartData {
+    labels: string[];
+    datasets: {
+      label: string;
+      data: number[];
+      backgroundColor: string;
+    }[];
+  }
+  interface ChartDataItem {
+    category: string;
+    value: number;
+  }
+  

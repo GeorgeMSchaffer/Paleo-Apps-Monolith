@@ -1,63 +1,89 @@
-//import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { IntervalFilter, PhylumFilter } from '../../components/filters';
+import {Link} from 'react-router-dom';
+import {IntervalFilter, PhylumFilter} from '../../components/filters';
+import {Container, Row, Col, Nav, Navbar} from 'react-bootstrap'
+
 export interface ITwoColumnPageProps {
     leftColumn: React.ReactNode;
     rightColumn: React.ReactNode
 }
-export function TwoColumnPage(props:ITwoColumnPageProps){
-    const {leftColumn, rightColumn} = props
+
+export function TwoColumnPage(props: ITwoColumnPageProps) {
+    const {leftColumn, rightColumn} = props;
+    const navLinkStyle = {
+        margin: 3,
+        padding: 3,
+        border: '1px solid #ccc'
+    }
     return (
-        <div className="container-fluid">
-            {/* Header */}
-            <div className="flex">
-                <div className="flex-auto">
-                    <header className="bg-primary text-white text-center py-3">
-                        <h1>Header</h1>
-                        <div className="flex flex-row">
+        <Container fluid style={{border: '1px solid red'}}>
 
-                        </div>
-                        <Link to="/intervals">Intervals</Link>
-                        <Link to="/occurrences">Occurrences</Link>
-                        <Link to="/diversity">Diversity</Link>
-                        <Link to="/species">Species</Link>
-                        
-                    </header>
-                </div>
-            </div>
 
-            {/* Main Content */}
-            <div className="flex-auto flex-column">
-                <div className="">
-                    <aside className="">
-                        <h2>Left Column</h2>
-                        <p>Content for the left column goes here.</p>
-                        
-                        <IntervalFilter/>
-                        <PhylumFilter/>
-                        {leftColumn}
-                    </aside>
-                </div>
-                <div className="">
-                    <main className="">
-                        <h2>Right Column</h2>
-                        <p>Content for the right column goes here.</p>
-                        {rightColumn}
-                    </main>
-                </div>
-            </div>
+            <Container fluid style={{marginBottom:5}}>
+                <Row xs={12} style={{paddingTop:5,paddingBottom:5}}>
+                <Col>Paleo Data Viewer</Col>
+                </Row>
+                <Row>
 
-            {/* Footer */}
-            <div className="row">
-                <div className="col-12">
-                    <footer className="bg-secondary text-white text-center py-3">
-                        <p>Footer</p>
-                    </footer>
-                </div>
-            </div>
-        </div>
-    );
+                <Col style={navLinkStyle} md={3}>Home</Col>
+                <Col style={navLinkStyle} md={3}>Intervals</Col>
+                <Col style={navLinkStyle} md={3}>Occurances</Col>
+                </Row>
+            </Container>
+            <Container fluid={true} style={{border:'1px solid black'}}>
+                <Row>
+
+                <Col style={{border:'1px solid black'}} md={3}>{leftColumn}</Col>
+                <Col md={9}>
+                    {rightColumn}
+                </Col>
+                </Row>
+            </Container>
+        </Container>
+    )
+    // return (
+    //     <>
+    //     <Container fluid style={{border: '1px solid red'}}>
+    //         <Row  xs={12} style={{border: '1px solid blue'}}>
+    //             <Navbar.Brand>Paleo Data Viewer</Navbar.Brand>
+    //             <Nav style={{border: '1px solid #ccc'}}>
+    //                 <Navbar>
+    //                     <Nav.Link style={navLinkStyle} as={Link} to="/">Home</Nav.Link>
+    //                     <Nav.Link style={navLinkStyle} as={Link} to="/intervals">Intervals</Nav.Link>
+    //                     <Nav.Link style={navLinkStyle} as={Link} to="/occurances">Occurances</Nav.Link>
+    //                 </Navbar>
+    //             </Nav>
+    //         </Row>
+    //     </Container>
+    //         <Container fluid>
+    //             {/* Main Content */}
+    //             <Col xs={3} md={3}>
+    //                 <aside className="">
+    //                     <h2>Left Column</h2>
+    //                     <p>Content for the left column goes here.</p>
+    //
+    //                     <IntervalFilter/>
+    //                     <PhylumFilter/>
+    //                     {leftColumn}
+    //                 </aside>
+    //             </Col>
+    //             <Col xs={9} md={9}>
+    //                 <main className="">
+    //                     <h2>Right Column</h2>
+    //                     <p>Content for the right column goes here.</p>
+    //                     {rightColumn}
+    //                 </main>
+    //             </Col>
+    //         </Container>
+    //         {/* Footer */}
+    //         <Container>
+    //             <Row>
+    //                 <footer className="bg-secondary text-white text-center py-3">
+    //                     <p>Footer</p>
+    //                 </footer>
+    //             </Row>
+    //         </Container>
+    // </>);
 };
 
 export default TwoColumnPage;

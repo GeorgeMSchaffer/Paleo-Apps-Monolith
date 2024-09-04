@@ -1,5 +1,5 @@
-import { defineConfig, loadEnv } from 'vite'
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
 /** @type {import('vite').UserConfig} */
 // https://vitejs.dev/{config/
 const env = { ...process.env,...process.cwd() };
@@ -7,17 +7,24 @@ const env = { ...process.env,...process.cwd() };
 export default defineConfig({
         plugins: [react()],
         server: {
-
+            port: 4000,
+            //strictPort: true,
+            watch: {
+                usePolling: true,
+                interval: 100
+            },
+            ws: true,
             proxy: {
                 '/api': {
-                    target: 'http://localhost:12382/api/',
+                    //target: 'http://localhost:12382/api/',
+                    target: 'http://localhost:8080/',
                     changeOrigin: true,
                     secure: false,
                     ws: true,
                     rewrite: (path) => path.replace(/^\/api/, '')
                 },
                 '/local': {
-                    target: 'http://localhost:3000/',
+                    target: 'http://localhost:8080/',
                     changeOrigin: true,
                     secure: false,
                     ws: true,

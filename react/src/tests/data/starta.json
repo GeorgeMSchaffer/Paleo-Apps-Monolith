@@ -1,6 +1,4 @@
-{
-  "elapsed_time":0.12,
-  "records": [
+[
     {"lth":"\"carbonate\",\"limestone\",\"limestone\"/sandstone,\"mixed carbonate-siliciclastic\",\"shale\",claystone,conglomerate,grainstone,lime mudstone,marl,marl/sandstone,mudstone,phosphorite,radiolarite,sandstone,sandstone/claystone,sandstone/gravel,siltstone,tuff/\"siliciclastic\"","eag":7.246,"lag":0,"cc2":"AM,AO,AR,AT,AU,AZ,BA,BE,CH,CL,CZ,DE,DK,EG,ES,FR,GE,HR,HU,IR,IT,JP,KZ,MD,MG,MT,MX,NL,NZ,PE,PK,PL,PT,RO,RS,RU,SI,SK,TF,TR,TW,UA,UK,US,ZA","nco":368,"noc":723},
     {"smb":"Aalten","lth":"\"siliciclastic\"","eag":15.98,"lag":13.82,"cc2":"NL","nco":1,"noc":2},
     {"smb":"Eibergen","lth":"claystone","eag":13.82,"lag":11.63,"cc2":"NL","nco":2,"noc":43},
@@ -358,5 +356,4 @@
     {"sgr":"Yeongil","sfm":"Duho","eag":23.03,"lag":5.333,"cc2":"KR","nco":1,"noc":1},
     {"sgr":"Yeonil","sfm":"Duho","lth":"mudstone","eag":15.98,"lag":11.63,"cc2":"KR","nco":1,"noc":1},
     {"sgr":"Yongning","eag":23.03,"lag":5.333,"cc2":"CN","nco":1,"noc":1}
-  ]
-}
+]

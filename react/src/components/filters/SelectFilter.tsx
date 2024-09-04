@@ -1,6 +1,5 @@
-import { Form, FormSelect, FormTextProps, FormSelectProps, FormLabel } from 'react-bootstrap';
-import { EnumIntervalType } from "../../common/types";
-import { getEnumKeys } from '../../common/utils';
+import { Form,FormGroup, FormLabel } from 'react-bootstrap';
+
 import { ChangeEvent } from 'react';
 export interface ISelectFilterProps {
     options: string[];
@@ -20,17 +19,17 @@ export function SelectFilter(props: ISelectFilterProps) {
         }
     }
     return (
-        <>
+        <FormGroup>
             <FormLabel>
-                {label}
+                <div>{label}</div>
             </FormLabel>
             <Form.Select onChange={(evt)=>onChange(evt)} multiple aria-label={`Filter By ${label}`}>
                 {options.map(option => 
-                    <option selected={option.includes(selectedValue) ? true : false } key={option} value={option}>
+                    <option selected={option.includes(selectedValue) ? true : false } key={option} value={selectedValue}>
                         {option}
                     </option>
                 )}
             </Form.Select>
-        </>
+        </FormGroup>
     )
 }

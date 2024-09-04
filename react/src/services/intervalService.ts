@@ -1,21 +1,26 @@
-import {Interval} from '../common/types/interval';
-import { axiosClient } from '../common/axiosClient';
+import axios from '../common/AxiosClient';
+import { Interval, IntervalJSON } from '../common/types.ts';
 export interface IInternalService {
     getIntervals(): Promise<Interval[]>;
 }
-export class intervalService {
-    public async getIntervals(): Promise<Interval[]> {
-        let intervals:Interval[] = [];
-        fetch('http://localhost:12382/api/interval/')
-        .then(response => response.json())
-        .then(data => {
-            intervals = data;
-            console.log(`\r\n - IntervalService - getIntervals - data:`, data);
-        })
-        .catch(error => {
-            console.error('Error getting intervals', error);
-        })
-        return intervals;
-    };
+//[TODO] Might consider a static class to hold the methods
+export class intervalsService {
+    async getIntervals(): Promise<Interval[]> {
+        const response = await axios.get('/intervals');
+        const data: IntervalJSON[] = response.data;
+        return data.map((interval:IntervalJSON) => {
+            return {
+                intervalNo: interval.interval_no,
+                recordType: interval.record_type,
+                intervalName: interval.interval_name,
+                abbrv: interval.abbrv,
+                parentNo: interval.parent_no,
+                color: interval.color,
+                tAge: interval.tAge,
+                bAge: interval.bAge,
+                referenceNo: interval.reference_no
+            }
+        });
+    }
 
 }
