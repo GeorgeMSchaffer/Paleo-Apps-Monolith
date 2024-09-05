@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { ChartData, Diversity } from '../common/types.ts';
+import { ChartData, Diversity } from '../../common/types';
 const diversityData = [
     {
         "interval_no": "922",

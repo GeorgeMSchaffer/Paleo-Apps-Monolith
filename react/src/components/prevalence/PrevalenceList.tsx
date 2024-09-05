@@ -1,10 +1,10 @@
-import {Prevalence,PrevalenceJSON} from "../../common/types.ts";
+import { Prevalence } from "../../common/types.ts";
 
-interface PrevalencelListProps {
+export interface PrevalencelListProps {
     prevalenceData: Prevalence[]
 }
 
-export default function PrevalencelList(props: PrevalencelListProps) {
+export  function PrevalencelList(props: PrevalencelListProps) {
     const prevalences = props.prevalenceData || [];
     return (
         <div className="p-4">

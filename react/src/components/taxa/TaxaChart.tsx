@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { ChartData, Taxa } from '../common/types.ts';
+import { ChartData, Taxa } from '../../common/types';
 
 
 const extractChartData = (data: Taxa[]): ChartData => {

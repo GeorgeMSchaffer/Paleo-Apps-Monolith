@@ -1,53 +1,63 @@
-import { Taxa } from "../../common/types.ts";
+import { Taxa } from '@/common/types';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { FixedSizeGrid as Grid } from 'react-window';
 
 interface TaxaListProps {
-    taxas: Taxa[]
+    taxas: Taxa[];
 }
 
-export  function TaxaList(props: TaxaListProps) {
-    const taxas = props.taxas || [];
+const Cell = ({ columnIndex, rowIndex, style, data }) => {
+    const item = data[rowIndex];
+    const columns = [
+        'taxonNo', 'taxonName', 'recordType', 'taxonName', 'taxonAttr', 
+        'acceptedNo', 'acceptedRank', 'parentNo', 'referenceNo', 'isExtant', 'numOccurances'
+    ];
+    const columnKey = columns[columnIndex];
+    return (
+        <div style={style} className="table-cell">
+            {item[columnKey]}
+        </div>
+    );
+};
+
+export function TaxaList(props: TaxaListProps) {
+    const data = props.taxas || [];
+    const columnCount = 11; // Number of columns
+    const rowCount = data.length; // Number of rows
+
     return (
         <div className="p-4">
-            <b className="block mb-2 text-lg"># of Taxas {taxas.length}</b>
+            <b className="block mb-2 text-lg"># of Taxas {data.length}</b>
             <div className="table-responsive">
-                <table className="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                           <th>Taxon No</th>
-                            <th>Taxon Name</th>
-                            <th>Record Type</th>
-                            <th>Taxon Name</th>
-                            <th>Taxon Attr</th>
-                            <th>Accepted No</th>
-                            <th>Accepted Rank</th>
-                            <th>Parent No</th>
-                            <th>Reference No</th>
-                            <th>Is Extant</th>
-                            <th># of Occurances</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {taxas && taxas.map((t:Taxa)=> {
-                           
-                            return (
-                                <tr key={t.taxonNo}>
-                                    <td>{t.taxonNo}</td>
-                                    <td>{t.taxonName}</td>
-                                    <td>{t.recordType}</td>
-                                    <td>{t.taxonName}</td>
-                                    <td>{t.taxonAttr}</td>
-                                    <td>{t.acceptedNo}</td>
-                                    <td>{t.acceptedRank}</td>
-                                    <td>{t.parentNo}</td>
-                                    <td>{t.referenceNo}</td>
-                                    <td>{t.isExtant}</td>
-                                    <td>{t.numOccurances}</td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
+                <div className="table table-striped table-bordered">
+                    <div className="table-header">
+                        <div className="table-row">
+                            <div className="table-cell">Taxon No</div>
+                            <div className="table-cell">Taxon Name</div>
+                            <div className="table-cell">Record Type</div>
+                            <div className="table-cell">Taxon Name</div>
+                            <div className="table-cell">Taxon Attr</div>
+                            <div className="table-cell">Accepted No</div>
+                            <div className="table-cell">Accepted Rank</div>
+                            <div className="table-cell">Parent No</div>
+                            <div className="table-cell">Reference No</div>
+                            <div className="table-cell">Is Extant</div>
+                            <div className="table-cell"># of Occurrences</div>
+                        </div>
+                    </div>
+                    <Grid
+                        columnCount={columnCount}
+                        columnWidth={150}
+                        height={400}
+                        rowCount={rowCount}
+                        rowHeight={35}
+                        width={150 * columnCount}
+                        itemData={data}
+                    >
+                        {Cell}
+                    </Grid>
+                </div>
             </div>
         </div>
-    )
+    );
 }

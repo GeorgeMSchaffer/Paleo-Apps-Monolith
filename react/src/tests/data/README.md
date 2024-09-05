@@ -22,6 +22,7 @@ Currently development is focused on getting a baseline app done in React and Spr
 
 ## TODOS
 * Add relationships between species, diversity to interval etc and defined them.
+* Add filters, sorting paginations
 
 ## JSON Server Params
 

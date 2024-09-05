@@ -27,7 +27,7 @@ export default function IntervalList(props: IntervalListProps) {
                             const {intervalNo,recordType,intervalName,abbrv,tAge,bAge,referenceNo} = interval;
                             return (
                                 <tr key={intervalNo}>
-                                    <td>{JSON.stringify(interval)}</td>
+
                                     <td>{intervalNo}</td>
                                     <td>{intervalName}</td>
                                     <td>{abbrv}</td>

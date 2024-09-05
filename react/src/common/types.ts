@@ -180,8 +180,8 @@ export interface IntervalJSON {
     abbrv: string;
     parent_no: number;
     color: string;
-    tAge: number;
-    bAge: number;
+    t_age: number;
+    b_age: number;
     reference_no: number;
 }
 export interface Occurance {
