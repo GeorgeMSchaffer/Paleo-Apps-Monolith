@@ -1,21 +1,27 @@
 import 'bootstrap/dist/css/bootstrap.css';
+import { connect } from 'react-redux';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
-import { MainLeftColumnFilters } from './components/filters/MainLeftColumnFilters.tsx';
-import { IntervalsContainer } from './components/intervals/IntervalsContainer.tsx';
-import { OccuranceContainer } from './components/occurances/OccuranceContainer.tsx';
-import { TaxaContainer } from './components/taxa/TaxaContainer.tsx';
-import { ChartsDemoPage } from './pages/ChartsDemoPage.tsx';
-import TwoColumnPage from './pages/layout/TwoColumnPage.tsx';
+import { MainLeftColumnFilters } from './components/filters/MainLeftColumnFilters';
+import { IntervalsContainer } from './components/intervals/IntervalsContainer';
+import { OccurrenceContainer } from './components/occurances/OccuranceContainer';
+import { TaxaContainer } from './components/taxa/TaxaContainer';
+import { ChartsDemoPage } from './pages/ChartsDemoPage';
+import TwoColumnPage from './pages/layout/TwoColumnPage';
+import { useAppSelector } from './store/hooks';
 function App() {
-
+    const errors = useAppSelector((state) => state.root.errors);
+    const occuranceFilters = useAppSelector((state) => state.occurances.filterFields);
+    const IntervalFilters = useAppSelector((state) => state.intervals.filterFields);
     //[TODO] move error state to redux for sharing
 //    const [error,setError] = useState<string>('');//[TODO] add ability to display an array of errors with an error type
 
 
   return (
     <>
-
+    {JSON.stringify(errors)}
+    {JSON.stringify(occuranceFilters)}
+    {JSON.stringify(IntervalFilters)}
         <Router>
             <Routes>
                 <Route path='/' element={
@@ -31,7 +37,7 @@ function App() {
                 <Route path='/occurances' 
                     element={
                     <TwoColumnPage leftColumn={<MainLeftColumnFilters/>} 
-                    rightColumn={<OccuranceContainer/>}/>} 
+                    rightColumn={<OccurrenceContainer/>}/>} 
                 />
                 <Route path='/charts' element={
                     <TwoColumnPage leftColumn={<MainLeftColumnFilters/>} 
@@ -49,7 +55,7 @@ function App() {
   )
 }
 
-export default App
+export default connect()(App)
 
 export function Welcome() {
     return <h1>Welcome</h1>

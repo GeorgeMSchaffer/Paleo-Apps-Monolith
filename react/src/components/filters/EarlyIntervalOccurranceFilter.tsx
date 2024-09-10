@@ -2,8 +2,7 @@ import React from 'react';
 import { useDispatch } from "react-redux";
 import { EnumIntervalType, IFilterField } from "../../common/types";
 import { getEnumKeys } from '../../common/utils';
-import { useAppSelector } from '../../store/hooks';
-import { addIntervalFilter, clearIntervalFilters } from "../../store/reducers/intervalReducer";
+import { addOccurranceFilter, clearOccurranceFilters } from "../../store/reducers/occurrenceReducer";
 import store from '../../store/store';
 import { SelectFilter } from './SelectFilter';
 const {getState} = store;
@@ -11,16 +10,14 @@ const {getState} = store;
 //const intervals = useAppSelector((state) => state.intervals.intervals); //filterIntervalsByIntervalName('',e.target.value);
 //console.log("🚀 ~ intervals:", intervals)
 
-export interface IIntervalFilterProps {
+export interface IEarlyIntervalOccurranceFilterProps {
 
 }
 
-export function IntervalRecordType(props: IIntervalFilterProps) {
+export function EarlyIntervalOccurranceFilter(props: IEarlyIntervalOccurranceFilterProps) {
     const options = getEnumKeys(EnumIntervalType)
     const dispatch = useDispatch();
-    const intervals = useAppSelector((state) =>{
-         return state.intervals.intervals;
-     });
+   
     //const {} = intervalSlice;
     const [selectedValue, setSelectedValue] = React.useState("");
     const onFilterChange = (e: any) => {
@@ -29,21 +26,21 @@ export function IntervalRecordType(props: IIntervalFilterProps) {
  
         const selectedValue = options[e.currentTarget.selectedIndex]
         if(!selectedValue){
-            dispatch(clearIntervalFilters())
+            dispatch(clearOccurranceFilters())
         }
         setSelectedValue(selectedValue);
         if(selectedValue){
 
             const filter: IFilterField = {
-                field: "record_type",
+                field: "early_interval",
                 value: selectedValue,
                 operator: "="
                 }
-            dispatch(addIntervalFilter(filter));
+            dispatch(addOccurranceFilter(filter));
         }
     }
     
     return(
-        <SelectFilter onChange={onFilterChange} label="Intervals" options={options} key={"early_interval"} selectedValue={selectedValue} />
+        <SelectFilter onChange={onFilterChange} label="Early Interval" options={options} key={"early_interval"} selectedValue={selectedValue} />
      )
 }

@@ -1,7 +1,6 @@
-import {Table} from "react-bootstrap";
-import { Occurance} from "../../common/types.ts";
+import { Occurrence } from "../../common/types";
 export interface IOccurrenceCard {
-    occurance: Occurance;
+    occurance: Occurrence;
 }
 export default function OccuranceCard(props: IOccurrenceCard) {
     const occurance = props.occurance;

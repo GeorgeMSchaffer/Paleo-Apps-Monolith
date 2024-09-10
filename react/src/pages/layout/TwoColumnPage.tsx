@@ -1,8 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {IntervalFilter, PhylumFilter} from '../../components/filters';
-import {Container, Row, Col, Nav, Navbar} from 'react-bootstrap'
-
+import { Col, Container, Row } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 export interface ITwoColumnPageProps {
     leftColumn: React.ReactNode;
     rightColumn: React.ReactNode
@@ -13,7 +11,15 @@ export function TwoColumnPage(props: ITwoColumnPageProps) {
     const navLinkStyle = {
         margin: 3,
         padding: 3,
-        border: '1px solid #ccc'
+        border: '1px solid #ccc',
+        textAlign: 'center' as const,
+        "&:hover": {
+          background: "#ccc"
+        },
+        "&:last-child": {
+        borderRight: "solid 1px #cccccc"
+        }
+        
     }
     return (
         <Container fluid style={{border: '1px solid red'}}>
@@ -25,9 +31,26 @@ export function TwoColumnPage(props: ITwoColumnPageProps) {
                 </Row>
                 <Row>
 
-                <Col style={navLinkStyle} md={3}>Home</Col>
-                <Col style={navLinkStyle} md={3}>Intervals</Col>
-                <Col style={navLinkStyle} md={3}>Occurances</Col>
+                <Col style={navLinkStyle} md={2}>
+                    <NavLink to="/">Home</NavLink>
+                </Col>
+                <Col style={navLinkStyle} md={2}>
+                    <NavLink to="/intervals">
+                        Intervals
+                    </NavLink>
+                </Col>
+                <Col style={navLinkStyle} md={2}>
+                    <NavLink to="/occurances">
+                        Occurances
+                    </NavLink>
+                </Col>
+                <Col style={navLinkStyle} md={2}>
+                    <NavLink to="/taxa">Taxa</NavLink>
+                </Col>
+                <Col style={navLinkStyle} md={2}>
+                    <NavLink to="/charts">All Charts</NavLink>
+                </Col>
+   
                 </Row>
             </Container>
             <Container fluid={true} style={{border:'1px solid black'}}>

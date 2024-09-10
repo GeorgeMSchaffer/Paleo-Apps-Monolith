@@ -1,6 +1,10 @@
-import { IntervalFilter } from "./IntervalFilter";
+import { CladeOrderFilter } from "./CladeOrderFilter";
+import { IntervalRecordType } from "./IntervalFilter";
 import { PhylumFilter } from "./PhylumFilter";
-
+import { TaxaFilter } from "./TaxaFilter";
 export {
-    IntervalFilter, PhylumFilter
+  CladeOrderFilter,
+  IntervalRecordType as IntervalFilter,
+  PhylumFilter,
+  TaxaFilter,
 };

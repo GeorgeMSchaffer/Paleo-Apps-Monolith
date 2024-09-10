@@ -1,10 +1,10 @@
-import { IntervalFilter } from "./IntervalFilter";
+import { IntervalRecordType } from "./IntervalFilter";
 import { PhylumFilter } from "./PhylumFilter";
 
 export function MainLeftColumnFilters(){
     return (
         <>
-            <IntervalFilter/>
+            <IntervalRecordType/>
             <PhylumFilter/>
         </>
     )

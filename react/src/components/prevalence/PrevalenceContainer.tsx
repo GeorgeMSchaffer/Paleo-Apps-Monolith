@@ -1,7 +1,7 @@
 //[TODO] Responsible for handling data specific to Occurances
 import React from "react";
 import { Prevalence } from "../../common/types.ts";
-import { getPrevalenceData } from "../../common/utils.ts";
+import { fetchPrevalence } from "../../common/utils.ts";
 import { PrevalenceChart } from "./PrevalenceChart.tsx";
 import { PrevalencelList } from "./PrevalenceList.tsx";
 export function PrevalenceContainer(){
@@ -13,7 +13,7 @@ export function PrevalenceContainer(){
 React.useEffect(() => {
     console.log('Use Effect - prevalences');
     (async () => {
-        const data:Prevalence[] = await getPrevalenceData();
+        const data:Prevalence[] = await fetchPrevalence();
         setPrevalenceData(data);
     }
     )()

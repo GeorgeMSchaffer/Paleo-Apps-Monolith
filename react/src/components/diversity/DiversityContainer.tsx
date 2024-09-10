@@ -1,44 +1,47 @@
 //[TODO] Responsible for handling data specific to Occurances
 import React from "react";
-import axios from "../../common/AxiosClient.ts";
-import { Diversity, DiversityJSON } from "../../common/types.ts";
-import { DiversityList } from "./DiversityList.tsx";
+import { Diversity } from "../../common/types";
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { setError, setLoading } from '../../store/rootReducer';
+import { DiversityList } from "./DiversityList";
+import { getAll } from './diversityService';
 export function PrevalenceContainer(){
 //    let intervals:Interval[] = [];
     //[TODO] Move to Redux to store
     const [diversity, setDiversity] = React.useState<Diversity[]>([]);
+    const dispatch = useAppDispatch()
+    const loading = useAppSelector((state) => state.intervals.loading);
 
-    async function getData(): Promise<Diversity[]> {
-            const response = await axios.get('/intervals');
-            const data: DiversityJSON[] = response.data;
-            let items: Diversity[] = [];
-            data.map((p:DiversityJSON) => {
-                    const diversity =  {
-                        intervalNo : p.interval_no,
-                        intervalName : p.interval_name,
-                        maxMya : p.max_mya,
-                        minMya : p.min_mya,
-                        xFt : p.x_Ft,
-                        xBL : p.x_bL,
-                        xFL : p.x_FL,
-                        xBt : p.x_Bt,
-                        sampledInBin : p.sampled_in_bin,
-                        numOccurances : p.num_occs
-                    } as Diversity; 
-                        items.push(diversity);
-                    })
-                    return items;
-            }
 
-        React.useEffect(() => {
-            console.log('Use Effect - prevalences');
+    React.useEffect(() => {
+        dispatch(setLoading(true));
+        try{
             (async () => {
-                const data:Diversity[] = await getData();
-                setDiversity(data);
-            }
-            )()
-
-        });
+                dispatch(setLoading(true));
+                const data = await getAll();
+                setTimeout(() => {
+                    dispatch(setLoading(false));
+                }, 3000);
+                console.log("🚀 ~ Dispatching setIntervals with ~ data:", data)
+                dispatch(setInterval(data));
+                dispatch(setLoading(false));
+            })()
+        } 
+        catch(ex:any)
+        {
+        console.log('Error fetching intervals', ex);
+        const error: IError = {
+            message: ex.message,
+            type: EnumMessageType.ERROR,
+            code: 500,
+        }
+        setError(error);
+        }
+        finally{
+            dispatch(setLoading(false));
+         }
+}
+    ,[dispatch])
 
     return (
         <>
