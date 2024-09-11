@@ -1,3 +1,4 @@
+import { Alert, Snackbar } from '@mui/material';
 import 'bootstrap/dist/css/bootstrap.css';
 import { connect } from 'react-redux';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
@@ -19,21 +20,22 @@ function App() {
 
   return (
     <>
-    {JSON.stringify(errors)}
-    {JSON.stringify(occuranceFilters)}
-    {JSON.stringify(IntervalFilters)}
+    <Snackbar>
+        <h2>Snack</h2>
+        <Alert severity="error">{JSON.stringify(errors)}</Alert>
+    </Snackbar>
         <Router>
             <Routes>
                 <Route path='/' element={
                     <TwoColumnPage 
                         leftColumn={<MainLeftColumnFilters/>} 
-                        rightColumn={<Welcome/>}/>} 
+                        rightColumn={<IntervalsContainer/>}/>} 
                     />
-                <Route path='/intervals' 
+                {/* <Route path='/intervals' 
                     element={<TwoColumnPage 
                         leftColumn={<MainLeftColumnFilters/>} 
                         rightColumn={<IntervalsContainer/>}/>} 
-                />
+                /> */}
                 <Route path='/occurances' 
                     element={
                     <TwoColumnPage leftColumn={<MainLeftColumnFilters/>} 

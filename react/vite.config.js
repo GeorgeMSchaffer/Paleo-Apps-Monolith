@@ -1,11 +1,15 @@
 import react from '@vitejs/plugin-react';
+import fixReactVirtualized from 'esbuild-plugin-react-virtualized';
 import { defineConfig } from 'vite';
 /** @type {import('vite').UserConfig} */
 // https://vitejs.dev/{config/
 const env = { ...process.env,...process.cwd() };
 
 export default defineConfig({
-        plugins: [react()],
+        plugins:[
+            react(),
+            fixReactVirtualized,
+        ],
         server: {
             port: 4000,
             //strictPort: true,

@@ -6,7 +6,7 @@ export interface IListPaginationProps {
   data: any[]
 }
 
-export function ListPagination(props: IListPaginationProps) {
+export function TablePagination(props: IListPaginationProps) {
   const pagination = useAppSelector((state) => state.root.settings.pagination);
   const {data} = props;
   const {page, perPage,sortBy,sortOrder} = pagination;

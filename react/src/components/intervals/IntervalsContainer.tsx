@@ -4,8 +4,7 @@ import { EnumMessageType, IError } from '../../common/types';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setError, setLoading } from '../../store/rootReducer';
 import store, { setIntervals } from '../../store/store';
-import { IntervalFilter } from '../filters';
-import { ListPagination } from '../shared/ListPagination';
+import { TablePagination } from '../shared/TablePagination';
 import IntervalList from "./IntervalList";
 import { searchIntervals } from './intervalService';
 export function IntervalsContainer(){
@@ -80,10 +79,7 @@ export function IntervalsContainer(){
     });
     return (
         <>
-           <h2>Intervals</h2>
-           {loading && <div>Loading...</div>}
-           <IntervalFilter/>
-           <ListPagination data={intervals}/>
+           <TablePagination data={intervals}/>
            <IntervalList intervals={intervals}/>
        </>
         

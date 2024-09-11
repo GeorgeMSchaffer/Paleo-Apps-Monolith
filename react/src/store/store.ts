@@ -35,6 +35,10 @@ const store = configureStore({
 const exports = {
   ...diversitySlice,
   ...intervalSlice,
+  ...taxaSlice,
+  ...occuranceSlice,
+  ...rootReducer,
+  ...store,
 };
 console.log(`\r \n ------ exports ---------- \r\n`, exports);
 //[TODO] Need to redo how we export out the actions and reducers this is too messy

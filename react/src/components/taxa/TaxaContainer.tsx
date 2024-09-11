@@ -1,37 +1,51 @@
-//[TODO] Responsible for handling data specific to Occurances
-import { useSelector } from "react-redux";
-import { Taxa } from "../../common/types";
-import { useAppDispatch } from '../../store/hooks';
-import { RootState } from "../../store/store";
-import { TaxaChart } from "./TaxaChart";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+import React from "react";
+import { EnumMessageType, IError, Taxa } from "../../common/types";
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { setTaxa } from "../../store/reducers/taxaReducer";
+import { setError, setLoading } from '../../store/store';
 import { TaxaList } from "./TaxaList";
+import { searchTaxa } from "./TaxaService";
 export interface TaxaContainerProps{
 
 }
-export function TaxaContainer(props:TaxaContainerProps){
-//    let intervals:Interval[] = [];
-    //[TODO] Move to Redux to store
-//    const [taxas, setTaxas] = React.useState<Taxa[]>([]);
-    const dispatch = useAppDispatch();
-    const taxa:Taxa[] = useSelector((state:RootState)=>state.taxa) //useAppSelector((state)=>state.taxa);
-//    const intervals = useAppSelector((state)=>state.intervals);
+export function TaxaContainer(){
+    const dispatch = useAppDispatch()
 
-// {{
-//     React.useEffect(() => {
-//         console.log('Use Effect - intervals');
-//                 //dispatch({type:'root/setError',payload:{message:e,type:'ERROR',stacktrace:console.trace()}});
-            
-//             dispatch({type:'taxa/setTaxa',payload:taxa});            
-
-//     },[props])}}
-
-    return (
-        <>
-           <h2>Taxa</h2>
-            <TaxaChart taxa={taxa}/>
-           <TaxaList taxas={taxa} />
-       </>
-        
-    )
+    let taxa:Taxa[] = useAppSelector((state) => state.taxa.taxaToDisplay) || [];
+    const pagination = useAppSelector((state) => state.taxa.settings.pagination);
+    const filters = useAppSelector((state) => state.taxa.filterFields);
+    React.useEffect(() => {
+        dispatch(setLoading(true));
+        try{
+            (async () => {
+                dispatch(setLoading(true));
+                
+                const data = await searchTaxa(filters,pagination);
+   
+                dispatch(setTaxa(data));
+                dispatch(setLoading(false));
+            })()
+        } 
+        catch(ex:any)
+        {
+        console.log('Error fetching taxa', ex);
+        const error: IError = {
+            message: ex.message,
+            type: EnumMessageType.ERROR,
+            code: 500,
+        }
+        setError(error);
+        }
+        finally{
+            dispatch(setLoading(false));
+         }
 }
-
+    ,[dispatch])
+    return (<div>
+        <b># of taxa: {taxa.length}</b>
+            <TaxaList taxa={taxa} />
+    </div>)
+}

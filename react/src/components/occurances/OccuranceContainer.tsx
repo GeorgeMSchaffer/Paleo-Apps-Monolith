@@ -12,7 +12,7 @@ export function OccurrenceContainer(){
     const dispatch = useAppDispatch()
 
     let occurances:Occurrence[] = useAppSelector((state) => state.occurances.occurancesToDisplay) || [];
-    const pagination = useAppSelector((state) => state.root.settings.pagination);
+    const pagination = useAppSelector((state) => state.occurances.settings.pagination);
     const filters = useAppSelector((state) => state.occurances.filterFields);
     React.useEffect(() => {
         dispatch(setLoading(true));
@@ -44,6 +44,9 @@ export function OccurrenceContainer(){
     return (<div>
         <b># of occurances: {occurances.length}</b>
         <EarlyIntervalOccurranceFilter/>
+        {occurances?.length ?
             <OccuranceList occurances={occurances} />
+            : <div>Loading...</div>
+        }
     </div>)
 }
