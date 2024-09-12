@@ -9,6 +9,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import { Diversity, Interval, Occurrence, Prevalence, Taxa } from '../../common/types';
+import { useAppSelector } from '../../store/hooks';
+import { setError,setPagination } from '../../store/rootReducer';
   export interface IMuiVirtualTableProps {
       data: Occurrence[] | Interval[] | Taxa[] | Diversity[] | Prevalence[];
       columns: MRT_ColumnDef<Occurrence>[] | MRT_ColumnDef<Interval>[] | MRT_ColumnDef<Taxa>[] | MRT_ColumnDef<Diversity>[] | MRT_ColumnDef<Prevalence>[];
@@ -22,6 +24,7 @@ import { Diversity, Interval, Occurrence, Prevalence, Taxa } from '../../common/
       const [sorting, setSorting] = useState<MRT_SortingState>([]);
       const rowVirtualizerInstanceRef = useRef<MRT_RowVirtualizer>(null);
       const [totalRows, setTotalRows] = useState(0);
+      const isLoading = useAppSelector((state) => state.root.loading);
       //accessorKey: 'name.firstName', //access nested data with dot notation
       useEffect(() => {
           setTotalRows(data.length);
@@ -64,7 +67,10 @@ import { Diversity, Interval, Occurrence, Prevalence, Taxa } from '../../common/
       //         </InfiniteLoader>
       //     </>
       // )
-  
+  const onSortingChange = (sorting: MRT_SortingState) => {
+    console.log("🚀 ~ onSortingChange ~ sorting:", sorting)
+    setSorting(sorting);
+  };
   //[TODO] TRY THIS NEXT https://www.material-react-table.com/docs/examples/virtualized
   useEffect(() => {
     //scroll to the top of the table when the sorting changes
@@ -78,18 +84,18 @@ import { Diversity, Interval, Occurrence, Prevalence, Taxa } from '../../common/
   const table = useMaterialReactTable<Occurrence>({
     columns,
     data, //10,000 rows
-    // defaultDisplayColumn: { enableResizing: true },
+    defaultDisplayColumn: { enableResizing: true },
     // enableBottomToolbar: false,
-    // enableColumnResizing: true,
+     enableColumnResizing: true,
     // enableColumnVirtualization: true,
-    // enableGlobalFilterModes: true,
-    // enablePagination: false,
-    // enableColumnPinning: true,
-    // enableRowNumbers: true,
-    // enableRowVirtualization: true,
+    enableGlobalFilterModes: true,
+    enablePagination: true,
+    enableColumnPinning: true,
+     enableRowNumbers: true,
+    enableRowVirtualization: true,
     // muiTableContainerProps: { sx: { maxHeight: '600px' } },
-    // onSortingChange: setSorting,
-    // state: { isLoading, sorting },
+      onSortingChange: (sortingState)=>{onSortingChange(sortingState);},
+      //state: { isLoading, sorting },
     // rowVirtualizerInstanceRef, //optional
     // rowVirtualizerOptions: { overscan: 5 }, //optionally customize the row virtualizer
     // columnVirtualizerOptions: { overscan: 2 }, //optionally customize the column virtualizer
