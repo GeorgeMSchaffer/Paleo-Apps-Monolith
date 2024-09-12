@@ -11,7 +11,8 @@ const extractChartData = (data: Taxa[]): ChartData => {
   const chartData: number[] = [];
 
   items.forEach((item) => {
-    labels.push(item.taxonName);
+    console.log('Item!!',item);
+    labels.push(item.taxonRank);x
     chartData.push(item.numOccurances);
   });
   const rtn = {
@@ -41,6 +42,7 @@ export const TaxaChart = (props:TaxaChartProps) => {
 
   useEffect(() => {
     const data = extractChartData(taxa);
+    console.log('Data',data);
     setChartData(data);
   }, []);
 
